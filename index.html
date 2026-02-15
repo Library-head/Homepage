@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David (Ziyu) Zhao | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #0ea5e9;
+            --accent-light: #7dd3fc;
+            --bg-dark: #020617;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
+            color: #f8fafc;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Moebius Inspired Background */
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.05;
+            z-index: 50;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+        }
+
+        .orb {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Glass Cards */
+        .glass-card {
+            background: rgba(15, 23, 42, 0.3);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(14, 165, 233, 0.3);
+            transform: translateY(-2px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+
+        @media (max-width: 768px) {
+            .orb { width: 300px; height: 300px; }
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        accent: '#0ea5e9',
+                        slate: {
+                            950: '#020617',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="selection:bg-accent/30">
+    <div class="noise"></div>
+    <div class="grid-bg"></div>
+    
+    <!-- Decorative Orbs -->
+    <div class="orb top-[-10%] right-[-10%]"></div>
+    <div class="orb bottom-[20%] left-[-10%]"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-40 top-0 border-b border-white/5 bg-slate-950/50 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full border-2 border-accent flex items-center justify-center">
+                    <span class="text-xs font-bold text-accent">D</span>
+                </div>
+                <span class="text-lg font-semibold tracking-tight mono">DAVID ZHAO</span>
+            </div>
+            <div class="hidden md:flex items-center gap-10 text-sm font-medium text-slate-400">
+                <a href="#about" class="hover:text-white transition-colors">ABOUT</a>
+                <a href="#experience" class="hover:text-white transition-colors">EXPERIENCE</a>
+                <a href="#skills" class="hover:text-white transition-colors">SKILLS</a>
+                <a href="mailto:your-email@example.com" class="px-5 py-2 rounded-full border border-white/10 hover:border-accent hover:text-accent transition-all duration-300">GET IN TOUCH</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="relative z-10">
+        <!-- Hero Section -->
+        <section id="about" class="min-h-screen flex items-center pt-20 px-6">
+            <div class="max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-16 items-center">
+                <div class="space-y-8">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-bold mono uppercase tracking-widest">
+                        <span class="relative flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+                        </span>
+                        Available for Internships
+                    </div>
+                    <h1 class="text-6xl md:text-8xl font-bold leading-[0.9] tracking-tighter">
+                        David <br>
+                        <span class="gradient-text">Ziyu Zhao</span>
+                    </h1>
+                    <p class="text-xl text-slate-400 max-w-lg leading-relaxed font-light">
+                        Exploring the intersection of <span class="text-white font-normal">Business Analytics</span> and <span class="text-white font-normal">Financial Intelligence</span>. 
+                        Building data-driven solutions for modern finance.
+                    </p>
+                    <div class="flex flex-wrap gap-6 pt-4">
+                        <a href="https://www.linkedin.com/in/david-%EF%BC%88ziyu%EF%BC%89-zhao-4250b5373/" target="_blank" class="group flex items-center gap-3 bg-white text-slate-950 px-8 py-4 rounded-full font-bold hover:bg-accent hover:text-white transition-all duration-500 transform hover:scale-105">
+                            VIEW LINKEDIN
+                            <i data-lucide="arrow-up-right" class="w-5 h-5 group-hover:rotate-45 transition-transform duration-300"></i>
+                        </a>
+                        <div class="flex items-center gap-4 text-slate-500 mono text-sm">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-accent"></i>
+                            Hangzhou, China
+                        </div>
+                    </div>
+                </div>
+                <div class="relative flex justify-center">
+                    <!-- Abstract Moebius Shape -->
+                    <div class="relative w-72 h-72 md:w-[450px] md:h-[450px]">
+                        <div class="absolute inset-0 border-[0.5px] border-white/20 rounded-full animate-[spin_20s_linear_infinite]"></div>
+                        <div class="absolute inset-10 border-[0.5px] border-accent/30 rounded-full animate-[spin_15s_linear_infinite_reverse]"></div>
+                        <div class="absolute inset-24 border-[0.5px] border-white/10 rounded-full animate-[spin_25s_linear_infinite]"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-48 h-48 md:w-80 md:h-80 glass-card rounded-2xl overflow-hidden floating flex items-center justify-center relative group">
+                                <i data-lucide="user" class="w-24 h-24 text-slate-800 group-hover:text-accent transition-colors duration-500"></i>
+                                <div class="absolute bottom-4 left-4 right-4 h-12 bg-white/5 border border-white/10 rounded-lg flex items-center justify-center text-[10px] mono text-slate-500 uppercase tracking-widest">
+                                    Profile Representation
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-32 px-6 relative">
+            <div class="max-w-6xl mx-auto">
+                <div class="mb-20 space-y-4">
+                    <h2 class="text-sm font-bold text-accent mono uppercase tracking-[0.3em]">Timeline</h2>
+                    <h3 class="text-4xl md:text-5xl font-bold tracking-tight">Professional Journey</h3>
+                </div>
+
+                <div class="grid gap-12">
+                    <!-- Deloitte -->
+                    <div class="group relative grid md:grid-cols-[1fr_2fr] gap-8 p-8 glass-card rounded-3xl overflow-hidden">
+                        <div class="space-y-2">
+                            <div class="text-sm text-slate-500 mono">2026.01 - 2026.02</div>
+                            <h4 class="text-2xl font-bold group-hover:text-accent transition-colors">Risk Advisory Intern</h4>
+                            <p class="text-slate-400">Deloitte (德勤)</p>
+                        </div>
+                        <div class="space-y-4 border-l border-white/5 pl-8">
+                            <p class="text-slate-400 leading-relaxed font-light">
+                                Focused on risk assessment and advisory within the financial sector. 
+                                Gaining hands-on experience in corporate governance and internal controls at a Global Top 4 firm.
+                            </p>
+                            <div class="flex flex-wrap gap-2 pt-2">
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] mono text-slate-400 border border-white/5">Risk Management</span>
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] mono text-slate-400 border border-white/5">Advisory</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sealand Securities -->
+                    <div class="group relative grid md:grid-cols-[1fr_2fr] gap-8 p-8 glass-card rounded-3xl overflow-hidden">
+                        <div class="space-y-2">
+                            <div class="text-sm text-slate-500 mono">2025.09 - 2025.12</div>
+                            <h4 class="text-2xl font-bold group-hover:text-accent transition-colors">Equity Research Intern</h4>
+                            <p class="text-slate-400">Sealand Securities (国海证券)</p>
+                        </div>
+                        <div class="space-y-4 border-l border-white/5 pl-8">
+                            <p class="text-slate-400 leading-relaxed font-light">
+                                Built comprehensive industry databases for warehouse AMR and auto-finance using <span class="text-white">Wind & Python</span>. 
+                                Conducted quantitative analysis on price trends and market penetration for institutional investment decisions.
+                            </p>
+                            <div class="flex flex-wrap gap-2 pt-2">
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] mono text-slate-400 border border-white/5">Python</span>
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] mono text-slate-400 border border-white/5">Wind Terminal</span>
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] mono text-slate-400 border border-white/5">Quant Research</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proya -->
+                    <div class="group relative grid md:grid-cols-[1fr_2fr] gap-8 p-8 glass-card rounded-3xl overflow-hidden">
+                        <div class="space-y-2">
+                            <div class="text-sm text-slate-500 mono">2025.07 - 2025.08</div>
+                            <h4 class="text-2xl font-bold group-hover:text-accent transition-colors">Business Analyst Intern</h4>
+                            <p class="text-slate-400">Proya Cosmetics (珀莱雅)</p>
+                        </div>
+                        <div class="space-y-4 border-l border-white/5 pl-8">
+                            <p class="text-slate-400 leading-relaxed font-light">
+                                Leveraged <span class="text-white">Pandas & SQL</span> to consolidate multi-channel financial data. 
+                                Developed a KPI framework to support potential M&A target assessments and channel optimization.
+                            </p>
+                            <div class="flex flex-wrap gap-2 pt-2">
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] mono text-slate-400 border border-white/5">SQL</span>
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] mono text-slate-400 border border-white/5">Tableau</span>
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] mono text-slate-400 border border-white/5">M&A Analysis</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills & Tech Section -->
+        <section id="skills" class="py-32 px-6 bg-white/[0.02]">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-20">
+                    <div class="space-y-12">
+                        <div class="space-y-4">
+                            <h2 class="text-sm font-bold text-accent mono uppercase tracking-[0.3em]">Capabilities</h2>
+                            <h3 class="text-4xl font-bold tracking-tight">Technical Arsenal</h3>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="p-6 glass-card rounded-2xl border-l-2 border-l-accent">
+                                <h4 class="text-xs mono text-slate-500 uppercase mb-4">Programming</h4>
+                                <ul class="space-y-2 font-medium">
+                                    <li>Python</li>
+                                    <li>SQL</li>
+                                    <li>R (Statistical)</li>
+                                </ul>
+                            </div>
+                            <div class="p-6 glass-card rounded-2xl border-l-2 border-l-white/20">
+                                <h4 class="text-xs mono text-slate-500 uppercase mb-4">Analysis</h4>
+                                <ul class="space-y-2 font-medium">
+                                    <li>Tableau / BI</li>
+                                    <li>Wind Terminal</li>
+                                    <li>Advanced Excel</li>
+                                </ul>
+                            </div>
+                            <div class="p-6 glass-card rounded-2xl border-l-2 border-l-white/20">
+                                <h4 class="text-xs mono text-slate-500 uppercase mb-4">Finance</h4>
+                                <ul class="space-y-2 font-medium">
+                                    <li>Equity Research</li>
+                                    <li>Risk Analysis</li>
+                                    <li>M&A Modeling</li>
+                                </ul>
+                            </div>
+                            <div class="p-6 glass-card rounded-2xl border-l-2 border-l-accent/50">
+                                <h4 class="text-xs mono text-slate-500 uppercase mb-4">Education</h4>
+                                <p class="font-medium">SWJTU</p>
+                                <p class="text-xs text-slate-500 mt-1">Business Analytics</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative flex items-center justify-center">
+                        <div class="w-full aspect-square border border-white/5 rounded-full flex items-center justify-center relative p-8">
+                            <div class="absolute inset-4 border border-white/5 rounded-full"></div>
+                            <div class="absolute inset-12 border border-white/5 rounded-full"></div>
+                            
+                            <div class="text-center space-y-4 z-10">
+                                <div class="text-6xl font-black text-white/10 mono tracking-tighter uppercase">DATA</div>
+                                <div class="text-6xl font-black text-accent/20 mono tracking-tighter uppercase ml-8">FINANCE</div>
+                                <div class="text-6xl font-black text-white/10 mono tracking-tighter uppercase">STRATEGY</div>
+                            </div>
+
+                            <div class="absolute top-[10%] left-[20%] px-4 py-2 glass-card rounded-full text-xs mono border-accent/40 text-accent floating">QUANTS</div>
+                            <div class="absolute bottom-[20%] right-[10%] px-4 py-2 glass-card rounded-full text-xs mono border-white/20 floating" style="animation-delay: -2s">ANALYTICS</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-20 px-6 border-t border-white/5">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
+            <div class="space-y-4 text-center md:text-left">
+                <div class="text-2xl font-bold mono tracking-tighter">DAVID ZHAO</div>
+                <p class="text-slate-500 text-sm max-w-xs">
+                    Inspired by the infinite horizons of Moebius. <br>
+                    Designed for the future of finance.
+                </p>
+            </div>
+            
+            <div class="flex flex-col items-center md:items-end gap-6">
+                <div class="flex gap-8">
+                    <a href="https://www.linkedin.com/in/david-%EF%BC%88ziyu%EF%BC%89-zhao-4250b5373/" target="_blank" class="text-slate-500 hover:text-accent transition-colors">
+                        <i data-lucide="linkedin" class="w-6 h-6"></i>
+                    </a>
+                    <a href="mailto:your-email@example.com" class="text-slate-500 hover:text-accent transition-colors">
+                        <i data-lucide="mail" class="w-6 h-6"></i>
+                    </a>
+                    <a href="https://github.com/" target="_blank" class="text-slate-500 hover:text-accent transition-colors">
+                        <i data-lucide="github" class="w-6 h-6"></i>
+                    </a>
+                </div>
+                <div class="text-[10px] mono text-slate-600 uppercase tracking-widest">
+                    © 2026 / ALL RIGHTS RESERVED
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
